@@ -1,3 +1,3 @@
 module Faker #:nodoc:
-  VERSION = "1.4.2"
+  VERSION = "1.6.3"
 end

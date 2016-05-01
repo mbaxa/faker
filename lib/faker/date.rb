@@ -8,6 +8,14 @@ module Faker
         Faker::Base::rand_in_range(from, to)
       end
 
+      def between_except(from, to, excepted)
+        begin
+          date = between(from, to)
+        end while date == excepted
+
+        date
+      end
+
       def forward(days = 365)
         from = ::Date.today + 1
         to   = ::Date.today + days
@@ -18,6 +26,14 @@ module Faker
       def backward(days = 365)
         from = ::Date.today - days
         to   = ::Date.today - 1
+
+        between(from, to).to_date
+      end
+
+      def birthday(min_age = 18, max_age = 65)
+        t = ::Date.today
+        from =  ::Date.new(t.year - min_age, t.month, t.day)
+        to   =  ::Date.new(t.year - max_age, t.month, t.day)
 
         between(from, to).to_date
       end
